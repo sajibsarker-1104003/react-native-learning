@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
 import { StyleSheet, Text, View,TextInput, Button } from 'react-native';
+import ListItem from './Components/ListItem/ListItem';
 
 
 
@@ -10,9 +11,9 @@ export default function App() {
 
   const[placeList,setPlaceList]=useState([]);
 
-  const list=placeList.map(item =>{
+  const list=placeList.map((item,i) =>{
     return(
-      <Text>{item}</Text>
+      <ListItem placeName={item} key={i}/>
     )
   })
 
@@ -45,9 +46,8 @@ export default function App() {
 
       </View>
 
-      <View style={{
-        width:"100%",
-      }}>
+      <View style={styles.ListItem}>
+        
         {list}
 
       </View>
@@ -75,5 +75,13 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'center',
     padding:20,
+  },
+
+  ListItem:{
+    width:"100%",
+    padding:10,
+    backgroundColor:"#eee",
+    margin:5,
+
   }
 });
