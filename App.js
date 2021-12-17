@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View,TextInput, Button,ScrollView } from 'react-native';
+import { StyleSheet, Text, View,TextInput, Button,ScrollView,FlatList } from 'react-native';
 import ListItem from './Components/ListItem/ListItem';
 
 
@@ -9,13 +9,8 @@ export default function App() {
   
   const [inputValue,setInputValue]=useState("");
 
-  const[placeList,setPlaceList]=useState([]);
-
-  const list=placeList.map((item,i) =>{
-    return(
-      <ListItem placeName={item} key={i} onItemPressed={()=>alert(item)}/>
-    )
-  })
+  const[placeList,setPlaceList]=useState([]); 
+  
 
   return (
     <View style={styles.container}>
@@ -36,7 +31,7 @@ export default function App() {
         //onPress={()=>alert(inputValue)}
         onPress={()=>{
           if(inputValue!==null){
-            setPlaceList([...placeList,inputValue])
+            setPlaceList([...placeList,{key:Math.random().toString(),value:inputValue}])
 
           }
           
@@ -46,12 +41,20 @@ export default function App() {
 
       </View>
 
-      <ScrollView style={{
+      <FlatList style={{
         width:"100%",
-      }}>
-        {list}
+      }}
+        data={placeList}
+        renderItem={
+          (info)=>{
+            return(
+              <ListItem placeName={info.item.value}  onItemPressed={()=>alert(item)}/>
+            );
+          }
+        }
+        />
 
-      </ScrollView>
+      
       <StatusBar style="auto" />
     </View>
   );
