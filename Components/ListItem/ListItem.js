@@ -3,12 +3,7 @@ import {View,Text,StyleSheet,TouchableHighlight,TouchableOpacity,TouchableWithou
 
 
 const ListItem=props =>{
-  return(
-    // <TouchableHighlight style={styles.ListItem} onPress={props.onItemPressed}>
-    //   <Text>
-    //     {props.placeName}
-    //   </Text>
-    // </TouchableHighlight>)
+  return(   
 
 <Pressable style={styles.ListItem} onPress={props.onItemPressed}>
 <Text>

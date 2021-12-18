@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { StyleSheet, Text, View,TextInput, Button,ScrollView,FlatList } from 'react-native';
-import ListItem from './Components/ListItem/ListItem';
+import { StyleSheet,View } from 'react-native';
+import InputPlace from './Components/InputPlace/InputPlace';
+import PlaceList from './Components/PlaceList/PlaceList';
 
 
 
@@ -14,45 +15,14 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputView}>
-        <TextInput 
-        style={{
-          width:"80%",
-          borderBottomWidth:1,
-          borderColor:"green",
-          padding:7,
-        }}
-        placeholder="Enter Something..."
-        value={inputValue}
-        onChangeText={text=>setInputValue(text)}
-        />
-        <Button
-        title="Add"
-        //onPress={()=>alert(inputValue)}
-        onPress={()=>{
-          if(inputValue!==null){
-            setPlaceList([...placeList,{key:Math.random().toString(),value:inputValue}])
-
-          }
-          
-        }}
-        
-        />
-
-      </View>
-
-      <FlatList style={{
-        width:"100%",
-      }}
-        data={placeList}
-        renderItem={
-          (info)=>{
-            return(
-              <ListItem placeName={info.item.value}  onItemPressed={()=>alert(item)}/>
-            );
-          }
-        }
-        />
+    <InputPlace
+    inputValue={inputValue}
+    setInputValue={setInputValue}
+    placeList={placeList}
+    setPlaceList={setPlaceList}
+    /> 
+    <PlaceList placeList={placeList}
+    />
 
       
       <StatusBar style="auto" />
@@ -72,14 +42,5 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     //flexDirection:'row',
     //flexDirection:'column-reverse',
-  },
-  inputView:{
-    width:"100%",
-    marginTop:50,
-    flexDirection:'row',
-    justifyContent:'center',
-    padding:20,
-  },
-
-  
+  },   
 });
