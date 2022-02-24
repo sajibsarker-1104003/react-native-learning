@@ -10,7 +10,8 @@ const PlaceList=props=>{
         data={props.placeList}
         renderItem={info=>{
             return(
-              <ListItem placeName={info.item.value}  onItemPressed={()=>alert(info.item.value)}/>
+              <ListItem placeName={info.item.value}  onItemPressed={()=>props.handleSelectedPlace(info.item.key)}
+              />
             );
           }
         }
